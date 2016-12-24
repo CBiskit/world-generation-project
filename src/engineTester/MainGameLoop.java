@@ -28,7 +28,7 @@ public class MainGameLoop {
                 -0.5f, 0.5f, 0f,    //V0
                 -0.5f, -0.5f, 0f,   //V1
                 0.5f, -0.5f, 0f,    //V2
-                -0.5f, 0.5f, 0f     //V3
+                0.5f, 0.5f, 0f     //V3
         };
 
         int[] indices = {
