@@ -55,7 +55,7 @@ public class Loader {
         GL30.glBindVertexArray(0);
     }
 
-    private void bindIndeces
+//    private void bindIndeces
 
     private FloatBuffer storeDataInFloatBuffer(float[] data){
         FloatBuffer buffer = BufferUtils.createFloatBuffer(data.length);
