@@ -5,6 +5,7 @@ import renderEngine.DisplayManager;
 import renderEngine.Loader;
 import renderEngine.RawModel;
 import renderEngine.Renderer;
+import shaders.StaticShader;
 
 /**
  * Created by c1547497 on 24/12/2016.
@@ -21,10 +22,10 @@ public class MainGameLoop {
 
         Loader loader = new Loader();
         Renderer renderer = new Renderer();
+        StaticShader shader = new StaticShader();
 
         //OpenGL expects vertices to be defined counter-clockwise by default
         float[] vertices = {
-                //left bottom triangle
                 -0.5f, 0.5f, 0f,    //V0
                 -0.5f, -0.5f, 0f,   //V1
                 0.5f, -0.5f, 0f,    //V2
@@ -42,10 +43,13 @@ public class MainGameLoop {
             renderer.prepare();
             //Game logic
             //Rendering
+            shader.start();
             renderer.render(model);
+            shader.stop();
             DisplayManager.updateDisplay();
         }
 
+        shader.cleanUp();
         loader.cleanUp();
         DisplayManager.closeDisplay();
     }

@@ -1,0 +1,18 @@
+package shaders;
+
+/**
+ * Created by c1547497 on 24/12/2016.
+ */
+public class StaticShader extends ShaderProgram {
+
+    private static final String VERTEX_FILE = "src/shaders/vertexShader.txt";
+    private static final String FRAGMENT_FILE = "src/shaders/fragmentShader.txt";
+
+    public StaticShader() {
+        super(VERTEX_FILE, FRAGMENT_FILE);
+    }
+
+    protected void bindAttributes() {
+        super.bindAttribute(0, "position");
+    }
+}
