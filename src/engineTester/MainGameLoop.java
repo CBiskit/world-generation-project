@@ -24,11 +24,11 @@ public class MainGameLoop {
 
         //OpenGL expects vertices to be defined counter-clockwise by default
         float[] vertices = {
-            //left bottom triangle
+                //left bottom triangle
                 -0.5f, 0.5f, 0f,
                 -0.5f, -0.5f, 0f,
                 0.5f, -0.5f, 0f,
-            //right top triangle
+                //right top triangle
                 0.5f, -0.5f, 0f,
                 0.5f, 0.5f, 0f,
                 -0.5f, 0.5f, 0f
