@@ -35,9 +35,13 @@ public class MainGameLoop {
 
         RawModel model = OBJLoader.loadObjModel("stall", loader);
 //        ModelTexture texture = new ModelTexture(loader.loadTexture("image"));
-        TexturedModel staticModel = new TexturedModel(model, new ModelTexture(loader.loadTexture("white")));
+        TexturedModel staticModel = new TexturedModel(model, new ModelTexture(loader.loadTexture("stallTexture")));
+        ModelTexture texture = staticModel.getTexture();
+        texture.setShineDamper(10);
+        texture.setReflectivity(1);
+
         Entity entity = new Entity(staticModel, new Vector3f(0,0,-25),0,0,0,1);
-        Light light = new Light(new Vector3f(0,0,-20), new Vector3f(1,1,1));
+        Light light = new Light(new Vector3f(0,0,-1), new Vector3f(1,1,1));
         Camera camera = new Camera();
 
         while(!Display.isCloseRequested()){
