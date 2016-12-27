@@ -49,8 +49,8 @@ public class MainGameLoop {
 
         //****************Player Object****************************
         RawModel bunnyModel = OBJLoader.loadObjModel("stanfordBunny", loader);
-        TexturedModel bunny = new TexturedModel(bunnyModel, new ModelTexture(loader.loadTexture("bunny")));
-        Player player = new Player(bunny, new Vector3f(100, 0, -50), 0, 0, 0, 1);
+        TexturedModel bunny = new TexturedModel(bunnyModel, new ModelTexture(loader.loadTexture("black")));
+        Player player = new Player(bunny, new Vector3f(415, 0, 0), 0, 180, 0, 0.5f);
         //*********************************************************
 
         //ModelData data = OBJFileLoader.loadOBJ("tree");
@@ -74,14 +74,13 @@ public class MainGameLoop {
         texture2.setShineDamper(10);
         texture2.setReflectivity(0);
 
-        Entity stallEntity = new Entity(stall, new Vector3f(400,0,-400),0,0,0,1);
-        Entity fernEntity = new Entity(fern, new Vector3f(400,0,-450),0,0,0,1) ;
+        Entity stallEntity = new Entity(stall, new Vector3f(400,0,-525),0,0,0,1);
+        Entity fernEntity = new Entity(fern, new Vector3f(400,0,-575),0,0,0,1) ;
         Light light = new Light(new Vector3f(0,0,0), new Vector3f(1,1,1));
 
-        Terrain terrain = new Terrain(0,-1,loader, texturePack, blendMap);
-        Terrain terrain2 = new Terrain(1,-1,loader, texturePack, blendMap);
+        Terrain terrain = new Terrain(0, -1, loader, texturePack, blendMap);
 
-        Camera camera = new Camera();
+        Camera camera = new Camera(player);
         MasterRenderer renderer = new MasterRenderer();
         while(!Display.isCloseRequested()){
             camera.move();
@@ -93,7 +92,6 @@ public class MainGameLoop {
             camera.move();
 
             renderer.processTerrain(terrain);
-            renderer.processTerrain(terrain2);
             renderer.processEntity(stallEntity);
             renderer.processEntity(fernEntity);
 
