@@ -31,8 +31,9 @@ public class Camera {
         calculatePitch();
         calculateAngle();
         float horizontalDistance = calculateHorizontalDistance();
-        float verticalDistance = calculateVeticalDistance();
+        float verticalDistance = calculateVerticalDistance();
         calculateCameraPosition(horizontalDistance, verticalDistance);
+        this.yaw = 180 -(player.getRoty() + angleAroundPlayer);
         if (pitch < 5 ){ pitch = 5; };
         if (pitch > 90){ pitch = 90; };
     }
@@ -67,7 +68,7 @@ public class Camera {
         return (float) (distanceFromPlayer * Math.cos(Math.toRadians(pitch)));
     }
 
-    private float calculateVeticalDistance(){
+    private float calculateVerticalDistance(){
         return (float) (distanceFromPlayer * Math.sin(Math.toRadians(pitch)));
     }
 
@@ -77,7 +78,7 @@ public class Camera {
     }
 
     private void calculatePitch(){
-        if (Mouse.isButtonDown(0)){
+        if (Mouse.isButtonDown(1)){
             float pitchChange = Mouse.getDY() * 0.1f;
             pitch -= pitchChange;
         }
