@@ -8,7 +8,7 @@ import org.lwjgl.util.vector.Vector3f;
  */
 public class Camera {
 
-    private final float CAMERA_SPEED = 0.5f;
+    private final float CAMERA_SPEED = 5f;
 
     private Vector3f position = new Vector3f(0,0,0);
     private float pitch;
@@ -34,6 +34,13 @@ public class Camera {
         if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)){
             position.y-=CAMERA_SPEED;
         }
+        if(Keyboard.isKeyDown(Keyboard.KEY_LEFT)){
+            yaw -= CAMERA_SPEED;
+        }
+        if(Keyboard.isKeyDown(Keyboard.KEY_RIGHT)){
+            yaw +=CAMERA_SPEED;
+        }
+
 
     }
 
