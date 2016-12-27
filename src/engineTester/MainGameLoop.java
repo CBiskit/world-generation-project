@@ -4,6 +4,8 @@ import entities.Camera;
 import entities.Entity;
 import entities.Light;
 import models.TexturedModel;
+import objConverter.ModelData;
+import objConverter.OBJFileLoader;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector3f;
 import renderEngine.*;
@@ -29,6 +31,9 @@ public class MainGameLoop {
 
         //OpenGL expects vertices to be defined counter-clockwise by default
 
+        ModelData data = OBJFileLoader.loadOBJ("tree");
+        RawModel treeModel = loader.loadToVAO(data.getVertices(), data.getTextureCoords(), data.getNormals(),
+                data.getIndices());
 
         RawModel model = OBJLoader.loadObjModel("stall", loader);
         RawModel model2 = OBJLoader.loadObjModel("fern", loader);
@@ -51,8 +56,8 @@ public class MainGameLoop {
         Entity fernEntity = new Entity(fern, new Vector3f(400,0,-450),0,0,0,1) ;
         Light light = new Light(new Vector3f(0,0,0), new Vector3f(1,1,1));
 
-        Terrain terrain = new Terrain(0,-1,loader,new ModelTexture(loader.loadTexture("grass-short")));
-        Terrain terrain2 = new Terrain(1,-1,loader,new ModelTexture(loader.loadTexture("grass-short")));
+        Terrain terrain = new Terrain(0,-1,loader,new ModelTexture(loader.loadTexture("grass")));
+        Terrain terrain2 = new Terrain(1,-1,loader,new ModelTexture(loader.loadTexture("grass")));
 
         Camera camera = new Camera();
         MasterRenderer renderer = new MasterRenderer();
