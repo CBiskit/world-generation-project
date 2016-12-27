@@ -4,13 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/src/engineTester/MainGameLoop.java" line="35" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="282ab748-f3b1-4514-8779-8904a8bb4343" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderEngine/MasterRenderer.java" afterPath="$PROJECT_DIR$/src/renderEngine/MasterRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/skybox/SkyboxRenderer.java" afterPath="$PROJECT_DIR$/src/skybox/SkyboxRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/skybox/SkyboxShader.java" afterPath="$PROJECT_DIR$/src/skybox/SkyboxShader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/skybox/skyboxFragmentShader.txt" afterPath="$PROJECT_DIR$/src/skybox/skyboxFragmentShader.txt" />
-    </list>
+    <list default="true" id="282ab748-f3b1-4514-8779-8904a8bb4343" name="Default" comment="" />
     <ignored path="world-generation-project.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -108,8 +102,8 @@
       <file leaf-file-name="SkyboxRenderer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/skybox/SkyboxRenderer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="62">
-              <caret line="96" column="29" selection-start-line="96" selection-start-column="29" selection-end-line="96" selection-end-column="29" />
+            <state relative-caret-position="504">
+              <caret line="122" column="20" selection-start-line="122" selection-start-column="20" selection-end-line="122" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -927,7 +921,7 @@
       <workItem from="1482786372110" duration="2341000" />
       <workItem from="1482837999274" duration="18182000" />
       <workItem from="1482856496562" duration="119000" />
-      <workItem from="1482856646747" duration="3143000" />
+      <workItem from="1482856646747" duration="3193000" />
     </task>
     <task id="LOCAL-00001" summary="Setting up project&#10;">
       <created>1482537459858</created>
@@ -940,7 +934,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49259000" />
+    <option name="totallyTimeSpent" value="49309000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
@@ -1435,8 +1429,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/skybox/SkyboxRenderer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="62">
-          <caret line="96" column="29" selection-start-line="96" selection-start-column="29" selection-end-line="96" selection-end-column="29" />
+        <state relative-caret-position="504">
+          <caret line="122" column="20" selection-start-line="122" selection-start-column="20" selection-end-line="122" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
