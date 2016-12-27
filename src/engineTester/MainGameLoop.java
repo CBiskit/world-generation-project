@@ -3,6 +3,7 @@ package engineTester;
 import entities.Camera;
 import entities.Entity;
 import entities.Light;
+import entities.Player;
 import models.TexturedModel;
 import objConverter.ModelData;
 import objConverter.OBJFileLoader;
@@ -46,6 +47,12 @@ public class MainGameLoop {
 
         //OpenGL expects vertices to be defined counter-clockwise by default
 
+        //****************Player Object****************************
+        RawModel bunnyModel = OBJLoader.loadObjModel("stanfordBunny", loader);
+        TexturedModel bunny = new TexturedModel(bunnyModel, new ModelTexture(loader.loadTexture("bunny")));
+        Player player = new Player(bunny, new Vector3f(100, 0, -50), 0, 0, 0, 1);
+        //*********************************************************
+
         //ModelData data = OBJFileLoader.loadOBJ("tree");
         //RawModel treeModel = loader.loadToVAO(data.getVertices(), data.getTextureCoords(), data.getNormals(),
                 //data.getIndices());
@@ -77,6 +84,9 @@ public class MainGameLoop {
         Camera camera = new Camera();
         MasterRenderer renderer = new MasterRenderer();
         while(!Display.isCloseRequested()){
+            camera.move();
+            player.move();
+            renderer.processEntity(player);
             //Game logic
             //Rendering
             //entity.increaseRotation(0,1,0);
