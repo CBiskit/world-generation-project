@@ -33,9 +33,9 @@ public class MainGameLoop {
 
         //****************TERRAIN TEXTURE PACK*********************
 
-        TerrainTexture backgroundTexture = new TerrainTexture(loader.loadTexture("lava"));
-        TerrainTexture rTexture = new TerrainTexture(loader.loadTexture("lavacracked"));
-        TerrainTexture gTexture = new TerrainTexture(loader.loadTexture("mountainrock"));
+        TerrainTexture backgroundTexture = new TerrainTexture(loader.loadTexture("grassy"));
+        TerrainTexture rTexture = new TerrainTexture(loader.loadTexture("dirt"));
+        TerrainTexture gTexture = new TerrainTexture(loader.loadTexture("grass-short"));
         TerrainTexture bTexture = new TerrainTexture(loader.loadTexture("cobblestone"));
 
         TerrainTexturePack texturePack = new TerrainTexturePack(backgroundTexture, rTexture, gTexture,
@@ -49,7 +49,7 @@ public class MainGameLoop {
 
         //****************Player Object****************************
         RawModel bunnyModel = OBJLoader.loadObjModel("stanfordBunny", loader);
-        TexturedModel bunny = new TexturedModel(bunnyModel, new ModelTexture(loader.loadTexture("black")));
+        TexturedModel bunny = new TexturedModel(bunnyModel, new ModelTexture(loader.loadTexture("mountainrock")));
         Player player = new Player(bunny, new Vector3f(415, 0, 0), 0, 180, 0, 0.5f);
         //*********************************************************
 
@@ -78,13 +78,13 @@ public class MainGameLoop {
         Entity fernEntity = new Entity(fern, new Vector3f(400,0,-575),0,0,0,1) ;
         Light light = new Light(new Vector3f(0,0,0), new Vector3f(1,1,1));
 
-        Terrain terrain = new Terrain(0, -1, loader, texturePack, blendMap);
+        Terrain terrain = new Terrain(0, -1, loader, texturePack, blendMap, "heightmap");
 
         Camera camera = new Camera(player);
         MasterRenderer renderer = new MasterRenderer();
         while(!Display.isCloseRequested()){
             camera.move();
-            player.move();
+            player.move(terrain);
             renderer.processEntity(player);
             //Game logic
             //Rendering
