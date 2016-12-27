@@ -24,8 +24,8 @@ public class Terrain {
     private static final float MAX_HEIGHT = 40;
     private static final float MAX_PIXEL_COLOUR = 256 * 256 * 256;
 
-    private float x;
-    private float z;
+    public float x;
+    public float z;
     private RawModel model;
     private TerrainTexturePack texturePack;
     private TerrainTexture blendMap;

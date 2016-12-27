@@ -17,6 +17,10 @@ import textures.ModelTexture;
 import textures.TerrainTexture;
 import textures.TerrainTexturePack;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 /**
  * Created by c1547497 on 24/12/2016.
  */
@@ -50,23 +54,19 @@ public class MainGameLoop {
         //****************Player Object****************************
         RawModel bunnyModel = OBJLoader.loadObjModel("stanfordBunny", loader);
         TexturedModel bunny = new TexturedModel(bunnyModel, new ModelTexture(loader.loadTexture("mountainrock")));
-        Player player = new Player(bunny, new Vector3f(415, 0, 0), 0, 180, 0, 0.5f);
         //*********************************************************
 
-        //ModelData data = OBJFileLoader.loadOBJ("tree");
-        //RawModel treeModel = loader.loadToVAO(data.getVertices(), data.getTextureCoords(), data.getNormals(),
-                //data.getIndices());
 
-        RawModel model = OBJLoader.loadObjModel("stall", loader);
+
+        RawModel model = OBJLoader.loadObjModel("tree", loader);
         RawModel model2 = OBJLoader.loadObjModel("fern", loader);
         //ModelTexture texture = new ModelTexture(loader.loadTexture("image"));
 
-        TexturedModel stall = new TexturedModel(model, new ModelTexture(loader.loadTexture("stallTexture")));
+        TexturedModel lowPolyTree = new TexturedModel(model, new ModelTexture(loader.loadTexture("lowPolyTree")));
         TexturedModel fern = new TexturedModel(model2, new ModelTexture(loader.loadTexture("fern")));
-
         fern.getTexture().setHasTransparency(true);
 
-        ModelTexture texture = stall.getTexture();
+        ModelTexture texture = lowPolyTree.getTexture();
         ModelTexture texture2 = fern.getTexture();
 
         texture.setShineDamper(10);
@@ -74,13 +74,31 @@ public class MainGameLoop {
         texture2.setShineDamper(10);
         texture2.setReflectivity(0);
 
-        Entity stallEntity = new Entity(stall, new Vector3f(400,0,-525),0,0,0,1);
-        Entity fernEntity = new Entity(fern, new Vector3f(400,0,-575),0,0,0,1) ;
-        Light light = new Light(new Vector3f(0,20000,20000), new Vector3f(1,1,1));
+        Light light = new Light(new Vector3f(0,2000,2000), new Vector3f(1,1,1));
 
 
         Terrain terrain = new Terrain(0, -1, loader, texturePack, blendMap, "heightmap");
         Terrain terrain2 = new Terrain(-1, -1, loader, texturePack, blendMap, "heightmap");
+
+        List<Entity> entities = new ArrayList<Entity>();
+        Random random = new Random();
+        for(int i=0;i<50;i++){
+            if(i % 10 == 0) {
+                float x = random.nextFloat() * 800 - 400;
+                float z = random.nextFloat() * -600;
+                float y = terrain.getHeightOfTerrain(x, z);
+                entities.add(new Entity(lowPolyTree, new Vector3f(x, y, z), 0, random.nextFloat() * 360, 0, 20));
+            }
+            if(i % 5 == 0){
+                float x = random.nextFloat() * 800 - 400;
+                float z = random.nextFloat() * -600;
+                float y = terrain.getHeightOfTerrain(x, z);
+                entities.add(new Entity(fern, new Vector3f(x, y, z), 0, random.nextFloat() * 360, 0, 2));
+
+            }
+        }
+
+        Player player = new Player(bunny, new Vector3f(100, 5, -150), 0, 180, 0, 0.6f);
 
         Camera camera = new Camera(player);
         MasterRenderer renderer = new MasterRenderer();
@@ -94,9 +112,12 @@ public class MainGameLoop {
             camera.move();
 
             renderer.processTerrain(terrain);
-            renderer.processEntity(stallEntity);
-            renderer.processEntity(fernEntity);
-
+            renderer.processTerrain(terrain2);
+//            renderer.processEntity(stallEntity);
+//            renderer.processEntity(fernEntity);
+            for(Entity entity:entities){
+                renderer.processEntity(entity);
+            }
             renderer.render(light, camera);
             shader.start();
             shader.loadLight(light);
