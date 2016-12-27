@@ -25,6 +25,10 @@ import entities.Light;
 import entities.Player;
 import guis.GuiRenderer;
 import guis.GuiTexture;
+import water.WaterFrameBuffers;
+import water.WaterRenderer;
+import water.WaterShader;
+import water.WaterTile;
 
 public class MainGameLoop {
 
@@ -119,20 +123,39 @@ public class MainGameLoop {
 		//guiTextures.add(gui);
 		GuiRenderer guiRenderer = new GuiRenderer(loader);
 
+		WaterShader waterShader = new WaterShader();
+        WaterRenderer waterRenderer = new WaterRenderer(loader, waterShader, renderer.getProjectionMatrix());
+        List<WaterTile> waters = new ArrayList<WaterTile>();
+        waters.add(new WaterTile(800, -800, -4));
+
+        WaterFrameBuffers fbos = new WaterFrameBuffers();
+        GuiTexture gui1 = new GuiTexture(fbos.getReflectionTexture(), new Vector2f(-0.5f,0.5f), new Vector2f(0.5f,0.5f));
+//        guiTextures.add(gui1);
+
+        //*********************GAME LOOP********************//
+
 		while (!Display.isCloseRequested()) {
 			player.move(terrain);
 			camera.move();
 			renderer.processEntity(player);
 			renderer.processTerrain(terrain);
+            fbos.bindReflectionFrameBuffer();
+
 			for (Entity entity : entities) {
 				renderer.processEntity(entity);
 			}
+
+            fbos.unbindCurrentFrameBuffer();
+
 			renderer.render(lights, camera);
 			guiRenderer.render(guiTextures);
+            waterRenderer.render(waters, camera);
 			DisplayManager.updateDisplay();
 		}
 
-		guiRenderer.cleanUp();
+		// *******************CLEAN UP********************//
+		fbos.cleanUp();
+        guiRenderer.cleanUp();
 		renderer.cleanUp();
 		loader.cleanUp();
 		DisplayManager.closeDisplay();
