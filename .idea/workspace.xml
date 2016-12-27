@@ -4,56 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/src/engineTester/MainGameLoop.java" line="35" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="282ab748-f3b1-4514-8779-8904a8bb4343" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/blendMap.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/bunny.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/fern.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/flower.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/grass.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/grassFlowers.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/grassTexture.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/grassy.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/heightmap.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/lowPolyTree.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/mud.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/path.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/pinkflowers.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/rainbow.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/tree.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/obj/bunny.obj" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/obj/exampleOBJ.obj" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/obj/fern.obj" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/obj/grassModel.obj" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/obj/lowPolyTree.obj" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/obj/stanfordBunny.obj" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/obj/tree.obj" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/entities/Player.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/objConverter/ModelData.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/objConverter/OBJFileLoader.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/objConverter/Vertex.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/textures/TerrainTexture.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/textures/TerrainTexturePack.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/obj/cube.obj" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/res/grasslong.png" afterPath="$PROJECT_DIR$/res/grass-long.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/engineTester/MainGameLoop.java" afterPath="$PROJECT_DIR$/src/engineTester/MainGameLoop.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entities/Camera.java" afterPath="$PROJECT_DIR$/src/entities/Camera.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderEngine/DisplayManager.java" afterPath="$PROJECT_DIR$/src/renderEngine/DisplayManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderEngine/EntityRenderer.java" afterPath="$PROJECT_DIR$/src/renderEngine/EntityRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderEngine/Loader.java" afterPath="$PROJECT_DIR$/src/renderEngine/Loader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderEngine/MasterRenderer.java" afterPath="$PROJECT_DIR$/src/renderEngine/MasterRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderEngine/TerrainRenderer.java" afterPath="$PROJECT_DIR$/src/renderEngine/TerrainRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/shaders/ShaderProgram.java" afterPath="$PROJECT_DIR$/src/shaders/ShaderProgram.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/shaders/StaticShader.java" afterPath="$PROJECT_DIR$/src/shaders/StaticShader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/shaders/TerrainShader.java" afterPath="$PROJECT_DIR$/src/shaders/TerrainShader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/shaders/fragmentShader.txt" afterPath="$PROJECT_DIR$/src/shaders/fragmentShader.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/shaders/terrainFragmentShader.txt" afterPath="$PROJECT_DIR$/src/shaders/terrainFragmentShader.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/shaders/terrainVertexShader.txt" afterPath="$PROJECT_DIR$/src/shaders/terrainVertexShader.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/shaders/vertexShader.txt" afterPath="$PROJECT_DIR$/src/shaders/vertexShader.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/terrains/Terrain.java" afterPath="$PROJECT_DIR$/src/terrains/Terrain.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/textures/ModelTexture.java" afterPath="$PROJECT_DIR$/src/textures/ModelTexture.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/toolbox/Maths.java" afterPath="$PROJECT_DIR$/src/toolbox/Maths.java" />
-    </list>
+    <list default="true" id="282ab748-f3b1-4514-8779-8904a8bb4343" name="Default" comment="" />
     <ignored path="world-generation-project.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -98,8 +49,8 @@
       <file leaf-file-name="MainGameLoop.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/engineTester/MainGameLoop.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-297">
-              <caret line="51" column="109" selection-start-line="51" selection-start-column="109" selection-end-line="51" selection-end-column="109" />
+            <state relative-caret-position="366">
+              <caret line="90" column="24" selection-start-line="90" selection-start-column="24" selection-end-line="90" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -804,7 +755,7 @@
       <workItem from="1482592095216" duration="11199000" />
       <workItem from="1482783794440" duration="2242000" />
       <workItem from="1482786372110" duration="2341000" />
-      <workItem from="1482837999274" duration="45000" />
+      <workItem from="1482837999274" duration="181000" />
     </task>
     <task id="LOCAL-00001" summary="Setting up project&#10;">
       <created>1482537459858</created>
@@ -817,7 +768,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27860000" />
+    <option name="totallyTimeSpent" value="27996000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
@@ -1352,8 +1303,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/engineTester/MainGameLoop.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-297">
-          <caret line="51" column="109" selection-start-line="51" selection-start-column="109" selection-end-line="51" selection-end-column="109" />
+        <state relative-caret-position="366">
+          <caret line="90" column="24" selection-start-line="90" selection-start-column="24" selection-end-line="90" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
