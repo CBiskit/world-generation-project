@@ -13,6 +13,8 @@ import models.RawModel;
 import shaders.StaticShader;
 import terrains.Terrain;
 import textures.ModelTexture;
+import textures.TerrainTexture;
+import textures.TerrainTexturePack;
 
 /**
  * Created by c1547497 on 24/12/2016.
@@ -27,13 +29,26 @@ public class MainGameLoop {
 
         DisplayManager.createDisplay();
         Loader loader = new Loader();
+
+        //****************TERRAIN TEXTURE PACK*********************
+
+        TerrainTexture backgroundTexture = new TerrainTexture(loader.loadTexture("lava"));
+        TerrainTexture rTexture = new TerrainTexture(loader.loadTexture("lavacracked"));
+        TerrainTexture gTexture = new TerrainTexture(loader.loadTexture("mountainrock"));
+        TerrainTexture bTexture = new TerrainTexture(loader.loadTexture("cobblestone"));
+
+        TerrainTexturePack texturePack = new TerrainTexturePack(backgroundTexture, rTexture, gTexture,
+                bTexture);
+        TerrainTexture blendMap = new TerrainTexture(loader.loadTexture("blendMap"));
+        //*********************************************************
+
         StaticShader shader = new StaticShader();
 
         //OpenGL expects vertices to be defined counter-clockwise by default
 
-        ModelData data = OBJFileLoader.loadOBJ("tree");
-        RawModel treeModel = loader.loadToVAO(data.getVertices(), data.getTextureCoords(), data.getNormals(),
-                data.getIndices());
+        //ModelData data = OBJFileLoader.loadOBJ("tree");
+        //RawModel treeModel = loader.loadToVAO(data.getVertices(), data.getTextureCoords(), data.getNormals(),
+                //data.getIndices());
 
         RawModel model = OBJLoader.loadObjModel("stall", loader);
         RawModel model2 = OBJLoader.loadObjModel("fern", loader);
@@ -56,8 +71,8 @@ public class MainGameLoop {
         Entity fernEntity = new Entity(fern, new Vector3f(400,0,-450),0,0,0,1) ;
         Light light = new Light(new Vector3f(0,0,0), new Vector3f(1,1,1));
 
-        Terrain terrain = new Terrain(0,-1,loader,new ModelTexture(loader.loadTexture("grass")));
-        Terrain terrain2 = new Terrain(1,-1,loader,new ModelTexture(loader.loadTexture("grass")));
+        Terrain terrain = new Terrain(0,-1,loader, texturePack, blendMap);
+        Terrain terrain2 = new Terrain(1,-1,loader, texturePack, blendMap);
 
         Camera camera = new Camera();
         MasterRenderer renderer = new MasterRenderer();
