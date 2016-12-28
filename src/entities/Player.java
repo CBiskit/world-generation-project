@@ -8,10 +8,11 @@ import org.lwjgl.util.vector.Vector3f;
 
 import renderEngine.DisplayManager;
 import terrains.Terrain;
+import toolbox.Maths;
 
 public class Player extends Entity {
 
-	private static final float RUN_SPEED = 15;
+	private static final float RUN_SPEED = 15; //15
 	private static final float TURN_SPEED = 160;
 	private static final float GRAVITY = -50;
 	private static final float JUMP_POWER = 18;
@@ -82,8 +83,8 @@ public class Player extends Entity {
 		}
 	}
 	public int[] getCurrentTerrainCoords(){
-		int x = (int)(super.getPosition().x / Terrain.getSIZE());
-		int z = (int)(super.getPosition().z / Terrain.getSIZE()) - 1;
+		int x = (int)(Math.floor(super.getPosition().x / Terrain.getSIZE()));
+		int z = (int)(Math.floor(super.getPosition().z / Terrain.getSIZE()));
 		return new int[] {x, z};
 	}
 

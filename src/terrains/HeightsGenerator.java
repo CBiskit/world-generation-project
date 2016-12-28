@@ -6,7 +6,7 @@ import java.util.Random;
  */
 public class HeightsGenerator {
 
-    private static final float AMPLITUDE = 7f;
+    private static final float AMPLITUDE = 5f;
     private float terrainSize = Terrain.getSIZE();
     private Random random = new Random();
     private int seed;

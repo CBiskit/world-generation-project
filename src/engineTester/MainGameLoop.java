@@ -30,11 +30,18 @@ import guis.GuiTexture;
 public class MainGameLoop {
 
 	public static int NUMBER_OF_TERRAINS_SQUARED = 2;
+	private static Player player;
+	private static MasterRenderer renderer;
+	private static Loader loader;
+	private static Terrain[][] terrains;
+	private static TerrainTexture blendMap;
+	private static TerrainTexturePack texturePack;
+
 	public static void main(String[] args) {
 
 		DisplayManager.createDisplay();
-		Loader loader = new Loader();
-		MasterRenderer renderer = new MasterRenderer(loader);
+		loader = new Loader();
+		renderer = new MasterRenderer(loader);
 
 		// ********* INITIALISE TERRAINS *******************************
 
@@ -42,19 +49,18 @@ public class MainGameLoop {
 		TerrainTexture rTexture = new TerrainTexture(loader.loadTexture("mud"));
 		TerrainTexture gTexture = new TerrainTexture(loader.loadTexture("pinkFlowers"));
 		TerrainTexture bTexture = new TerrainTexture(loader.loadTexture("path"));
-		TerrainTexture blendMap = new TerrainTexture(loader.loadTexture("blendMap"));
-		TerrainTexturePack texturePack = new TerrainTexturePack(backgroundTexture, rTexture,
+		blendMap = new TerrainTexture(loader.loadTexture("blendMap"));
+	    texturePack = new TerrainTexturePack(backgroundTexture, rTexture,
 				gTexture, bTexture);
 
-		Terrain spawnTerrain = new Terrain(0, -1, loader, texturePack, blendMap);
-
-		Terrain[][] terrains = new Terrain[100][100];
+	    terrains = new Terrain[100][100];
 		for (int t = 0; t < NUMBER_OF_TERRAINS_SQUARED; t++) {
 			for (int j = 0; j < NUMBER_OF_TERRAINS_SQUARED; j++) {
 					terrains[t][j] = new Terrain(t, j - 1, loader, texturePack, blendMap);
 			}
 		}
 		// ************************************************************
+
 
 		//********* INITIALISE MODELS *********************************
 		RawModel person = OBJLoader.loadObjModel("person", loader);
@@ -90,12 +96,13 @@ public class MainGameLoop {
 		fern.getTexture().setHasTransparency(true);
 		//**************************************************************
 
+
 		//************** INITIALISE WORLD ******************************
 		List<Entity> entities = new ArrayList<Entity>();
 		Random random = new Random();
 		for (int t = 0; t < NUMBER_OF_TERRAINS_SQUARED; t++) {
 			for (int j = 0; j < NUMBER_OF_TERRAINS_SQUARED; j++) {
-				for (int i = 0; i < 400; i++) {
+				for (int i = 0; i < 800; i++) {
 					if (i % 3 == 0) {
 						float x = (random.nextFloat() * 800) + (terrains[t][j].getX());
 						float z = (random.nextFloat() * 800) + (terrains[t][j].getZ());
@@ -141,9 +148,16 @@ public class MainGameLoop {
 				}
 			}
 		}
-		Player player = new Player(playerModel, new Vector3f(100, 5, -150), 0, 180, 0, 0.4f);
+		//*************************************************************
+
+
+		//**************** INITIALISE PLAYER **************************
+		float x = (float)(random.nextInt(800));
+		float z = (float)(random.nextInt(800));
+		player = new Player(playerModel, new Vector3f(x, terrains[0][0].getHeightOfTerrain(x, z), z), 0, 180, 0, 0.4f);
 		Camera camera = new Camera(player);
 		//*************************************************************
+
 
 		//**************** INITIALISE LIGHTING ************************
 		List<Light> lights = new ArrayList<Light>();
@@ -157,6 +171,7 @@ public class MainGameLoop {
         //entities.add(new Entity(lamp, new Vector3f(293, -6.8f, -305), 0, 0, 0, 1));
         //*************************************************************
 
+
 		//************ INITIALISE GUIS ********************************
 		List<GuiTexture> guiTextures = new ArrayList<GuiTexture>();
 		GuiTexture gui = new GuiTexture(loader.loadTexture("health"),new Vector2f(-0.8f,0.9f), new Vector2f(0.2f,0.3f));
@@ -169,22 +184,22 @@ public class MainGameLoop {
 		while (!Display.isCloseRequested()) {
 			for (int t = 0; t < NUMBER_OF_TERRAINS_SQUARED; t++) {
 				for (int j = 0; j < NUMBER_OF_TERRAINS_SQUARED; j++) {
-					renderer.processTerrain(terrains[t][j]);
-					if ((t == player.getCurrentTerrainCoords()[0]) && (j - 1 == player.getCurrentTerrainCoords()[1])){
-						player.move(terrains[t][j]);
-						camera.move();
-					}
+					//generateNewTerrains(t, j);
+					renderNearbyTerrains(t, j);
+					moveplayer(t, j, camera);
 				}
 			}
 			for (Entity entity : entities) {
 				renderer.processEntity(entity);
 			}
+			System.out.println(player.getCurrentTerrainCoords()[0] + ", " + player.getCurrentTerrainCoords()[1]);
 			renderer.processEntity(player);
 			renderer.render(lights, camera);
 			guiRenderer.render(guiTextures);
 			DisplayManager.updateDisplay();
 		}
 		//*************************************************************
+
 
 		//*********** CLEAN UP ****************************************
 		guiRenderer.cleanUp();
@@ -194,4 +209,29 @@ public class MainGameLoop {
 		//*************************************************************
 	}
 
+	private static void generateNewTerrains(int t, int j){
+				for (int i = 0; i < 2; i++)
+				{
+					//if (terrains[player.getCurrentTerrainCoords()[0] + i][player.getCurrentTerrainCoords()[1] + i] == null){
+					//	terrains[i][j] = new Terrain(t, j - 1, loader, texturePack, blendMap);
+					//}
+					//if (terrains[player.getCurrentTerrainCoords()[0] - i][player.getCurrentTerrainCoords()[1] - i] == null){
+					//	terrains[i][j] = new Terrain(t, j - 1, loader, texturePack, blendMap);
+					//}
+				}
+	}
+
+	private static void renderNearbyTerrains(int t, int j){
+		if (t < player.getCurrentTerrainCoords()[0] + 2 && t > player.getCurrentTerrainCoords()[0] - 2 &&
+				j < player.getCurrentTerrainCoords()[0] + 2 && j > player.getCurrentTerrainCoords()[1] - 2){
+			renderer.processTerrain(terrains[t][j]);
+		}
+	}
+
+	private static void moveplayer(int t, int j, Camera camera){
+		if ((t == player.getCurrentTerrainCoords()[0]) && (j == player.getCurrentTerrainCoords()[1] + 1)){
+			player.move(terrains[t][j]);
+			camera.move();
+		}
+	}
 }
