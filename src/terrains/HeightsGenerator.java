@@ -6,7 +6,7 @@ import java.util.Random;
  */
 public class HeightsGenerator {
 
-    private static final float AMPLITUDE = 10f;
+    private static final float AMPLITUDE = 7f;
 
     private Random random = new Random();
     private int seed;
@@ -16,7 +16,11 @@ public class HeightsGenerator {
     }
 
     public float generateHeight(int x, int z) {
-        return getInterpolatedNoise(x / 24f, z / 24f) * AMPLITUDE;
+        float a =  getInterpolatedNoise(x / 24f, z / 24f) * AMPLITUDE;
+        float b =  getInterpolatedNoise(x / 12f, z / 12f) * AMPLITUDE / 3f;
+        float c =  getInterpolatedNoise(x / 6f, z / 6f) * AMPLITUDE / 9f;
+        float d =  getInterpolatedNoise(x / 3f, z / 3f) * AMPLITUDE / 27f;
+        return a + b + c + d;
     }
 
     private float getInterpolatedNoise(float x, float z){
