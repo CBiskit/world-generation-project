@@ -51,24 +51,33 @@ public class Player extends Entity {
 	}
 
 	private void checkInputs() {
-		if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
-			this.currentSpeed = RUN_SPEED;
-		} else if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
-			this.currentSpeed = -RUN_SPEED;
-		} else {
-			this.currentSpeed = 0;
-		}
+		if (!isInAir) {
+			if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
+				this.currentSpeed = RUN_SPEED;
+			} else if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
+				this.currentSpeed = -RUN_SPEED;
+			} else {
+				this.currentSpeed = 0;
+			}
 
-		if (Keyboard.isKeyDown(Keyboard.KEY_D)) {
-			this.currentTurnSpeed = -TURN_SPEED;
-		} else if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
-			this.currentTurnSpeed = TURN_SPEED;
-		} else {
+			if (Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
+				jump();
+			}
+
+			if (Keyboard.isKeyDown(Keyboard.KEY_D)) {
+				this.currentTurnSpeed = -TURN_SPEED;
+			} else if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
+				this.currentTurnSpeed = TURN_SPEED;
+			} else {
+				this.currentTurnSpeed = 0;
+			}
+		}
+		else
+		{
 			this.currentTurnSpeed = 0;
-		}
-
-		if (Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
-			jump();
+			if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
+				this.currentSpeed = RUN_SPEED;
+			}
 		}
 	}
 
