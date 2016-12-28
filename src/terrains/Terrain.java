@@ -18,8 +18,7 @@ import toolbox.Maths;
 
 public class Terrain {
 
-	private static final float SIZE = 800;
-
+	public static float SIZE = 800;
 	private float x;
 	private float z;
 	private RawModel model;
@@ -35,6 +34,14 @@ public class Terrain {
 		this.x = gridX * SIZE;
 		this.z = gridZ * SIZE;
 		this.model = generateTerrain(loader);
+	}
+
+	public static float getSIZE() {
+		return SIZE;
+	}
+
+	public static void setSIZE(float SIZE) {
+		Terrain.SIZE = SIZE;
 	}
 
 	public float getX() {

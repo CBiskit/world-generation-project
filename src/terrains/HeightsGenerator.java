@@ -7,7 +7,7 @@ import java.util.Random;
 public class HeightsGenerator {
 
     private static final float AMPLITUDE = 7f;
-
+    private float terrainSize = Terrain.getSIZE();
     private Random random = new Random();
     private int seed;
 
@@ -16,11 +16,14 @@ public class HeightsGenerator {
     }
 
     public float generateHeight(int x, int z) {
-        float a =  getInterpolatedNoise(x / 24f, z / 24f) * AMPLITUDE;
-        float b =  getInterpolatedNoise(x / 12f, z / 12f) * AMPLITUDE / 3f;
-        float c =  getInterpolatedNoise(x / 6f, z / 6f) * AMPLITUDE / 9f;
-        float d =  getInterpolatedNoise(x / 3f, z / 3f) * AMPLITUDE / 27f;
-        return a + b + c + d;
+        if (x > 30 || x < terrainSize - 30 || z > 30 || z < terrainSize - 30) {
+            float a = getInterpolatedNoise(x / 24f, z / 24f) * AMPLITUDE;
+            float b = getInterpolatedNoise(x / 12f, z / 12f) * AMPLITUDE / 3f;
+            float c = getInterpolatedNoise(x / 6f, z / 6f) * AMPLITUDE / 9f;
+            float d = getInterpolatedNoise(x / 3f, z / 3f) * AMPLITUDE / 27f;
+            return a + b + c + d;
+        }
+        return 0;
     }
 
     private float getInterpolatedNoise(float x, float z){
@@ -52,7 +55,7 @@ public class HeightsGenerator {
     }
 
     private float getNoise(int x, int z){
-        random.setSeed((x * 494532) + (z * 76586) + seed);
-        return random.nextFloat() * 2f - 1f;
+            random.setSeed((x * 494532) + (z * 76586) + seed);
+            return random.nextFloat() * 2f - 1f;
     }
 }

@@ -1,5 +1,6 @@
 package entities;
 
+import engineTester.MainGameLoop;
 import models.TexturedModel;
 
 import org.lwjgl.input.Keyboard;
@@ -79,6 +80,11 @@ public class Player extends Entity {
 				this.currentSpeed = RUN_SPEED;
 			}
 		}
+	}
+	public int[] getCurrentTerrainCoords(){
+		int x = (int)(super.getPosition().x / Terrain.getSIZE());
+		int z = (int)(super.getPosition().z / Terrain.getSIZE()) - 1;
+		return new int[] {x, z};
 	}
 
 }

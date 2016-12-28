@@ -7,6 +7,7 @@ import java.util.Random;
 import models.RawModel;
 import models.TexturedModel;
 
+import org.lwjgl.Sys;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
@@ -28,6 +29,7 @@ import guis.GuiTexture;
 
 public class MainGameLoop {
 
+	public static int NUMBER_OF_TERRAINS_SQUARED = 2;
 	public static void main(String[] args) {
 
 		DisplayManager.createDisplay();
@@ -45,15 +47,11 @@ public class MainGameLoop {
 				gTexture, bTexture);
 
 		Terrain spawnTerrain = new Terrain(0, -1, loader, texturePack, blendMap);
-		List<Terrain> terrains = new ArrayList<Terrain>();
-		for (int t = 0; t < 3; t++) {
-			for (int j = -1; j < 2; j++) {
-				if (t == 0 && j == -1) {
-					terrains.add(spawnTerrain);
-				}
-				else {
-					terrains.add(new Terrain(t, j, loader, texturePack, blendMap));
-				}
+
+		Terrain[][] terrains = new Terrain[100][100];
+		for (int t = 0; t < NUMBER_OF_TERRAINS_SQUARED; t++) {
+			for (int j = 0; j < NUMBER_OF_TERRAINS_SQUARED; j++) {
+					terrains[t][j] = new Terrain(t, j - 1, loader, texturePack, blendMap);
 			}
 		}
 		// ************************************************************
@@ -95,49 +93,51 @@ public class MainGameLoop {
 		//************** INITIALISE WORLD ******************************
 		List<Entity> entities = new ArrayList<Entity>();
 		Random random = new Random();
-		for (Terrain terrain : terrains) {
-			for (int i = 0; i < 400; i++) {
-				if (i % 3 == 0) {
-					float x = (random.nextFloat() * 800) + (terrain.getX());
-					float z = (random.nextFloat() * 800) + (terrain.getZ());
-					float y = terrain.getHeightOfTerrain(x, z);
-                	entities.add(new Entity(fern, random.nextInt(4), new Vector3f(x, y, z), 0, random.nextFloat() * 360,
-							0, 0.5f));
-				}
-				if (i % 1 == 0) {
-					float x = (random.nextFloat() * 800) + (terrain.getX());
-					float z = (random.nextFloat() * 800) + (terrain.getZ());
-					float y = terrain.getHeightOfTerrain(x, z);
-					entities.add(new Entity(pinetree, random.nextInt(4), new Vector3f(x, y, z), 0, random.nextFloat() * 360,
-							0, random.nextFloat() * 0.1f + 0.6f));
-				}
-				//if (i % 10 == 0) {
-				//	float x = (random.nextFloat() * 800) + (terrain.getX());
-				//	float z = (random.nextFloat() * 800) + (terrain.getZ());
-				//	float y = terrain.getHeightOfTerrain(x, z);
-				//	entities.add(new Entity(rock1, random.nextInt(4), new Vector3f(x, y, z), 0, random.nextFloat() * 360,
-				//			0, random.nextFloat() * 0.1f + 0.6f));
-				//}
-				//if (i % 10 == 0) {
-				//	float x = (random.nextFloat() * 800) + (terrain.getX());
-				//	float z = (random.nextFloat() * 800) + (terrain.getZ());
-				//	float y = terrain.getHeightOfTerrain(x, z);
-				//	entities.add(new Entity(rock2, random.nextInt(4), new Vector3f(x, y, z), 0, random.nextFloat() * 360,
-				//			0, random.nextFloat() * 0.1f + 0.6f));
-				//}
-				if (i % 30 == 0) {
-					float x = (random.nextFloat() * 800) + (terrain.getX());
-					float z = (random.nextFloat() * 800) + (terrain.getZ());
-					float y = terrain.getHeightOfTerrain(x, z);
-					entities.add(new Entity(box, random.nextInt(4), new Vector3f(x, y + 2.0f, z), 0, random.nextFloat() * 360,
-							0, 2.0f));
-				}
-				if (i % 300 == 0) {
-					float x = (random.nextFloat() * 800) + (terrain.getX());
-					float z = (random.nextFloat() * 800) + (terrain.getZ());
-					float y = terrain.getHeightOfTerrain(x, z);
-					entities.add(new Entity(cube, random.nextInt(4), new Vector3f(x, y + 2.0f, z), 0, random.nextFloat() * 360,
-							0, 1.5f));
+		for (int t = 0; t < NUMBER_OF_TERRAINS_SQUARED; t++) {
+			for (int j = 0; j < NUMBER_OF_TERRAINS_SQUARED; j++) {
+				for (int i = 0; i < 400; i++) {
+					if (i % 3 == 0) {
+						float x = (random.nextFloat() * 800) + (terrains[t][j].getX());
+						float z = (random.nextFloat() * 800) + (terrains[t][j].getZ());
+						float y = terrains[t][j].getHeightOfTerrain(x, z);
+						entities.add(new Entity(fern, random.nextInt(4), new Vector3f(x, y, z), 0, random.nextFloat() * 360,
+								0, 0.5f));
+					}
+					if (i % 1 == 0) {
+						float x = (random.nextFloat() * 800) + (terrains[t][j].getX());
+						float z = (random.nextFloat() * 800) + (terrains[t][j].getZ());
+						float y = terrains[t][j].getHeightOfTerrain(x, z);
+						entities.add(new Entity(pinetree, random.nextInt(4), new Vector3f(x, y, z), 0, random.nextFloat() * 360,
+								0, random.nextFloat() * 0.1f + 0.6f));
+					}
+					//if (i % 10 == 0) {
+					//	float x = (random.nextFloat() * 800) + (terrain.getX());
+					//	float z = (random.nextFloat() * 800) + (terrain.getZ());
+					//	float y = terrain.getHeightOfTerrain(x, z);
+					//	entities.add(new Entity(rock1, random.nextInt(4), new Vector3f(x, y, z), 0, random.nextFloat() * 360,
+					//			0, random.nextFloat() * 0.1f + 0.6f));
+					//}
+					//if (i % 10 == 0) {
+					//	float x = (random.nextFloat() * 800) + (terrain.getX());
+					//	float z = (random.nextFloat() * 800) + (terrain.getZ());
+					//	float y = terrain.getHeightOfTerrain(x, z);
+					//	entities.add(new Entity(rock2, random.nextInt(4), new Vector3f(x, y, z), 0, random.nextFloat() * 360,
+					//			0, random.nextFloat() * 0.1f + 0.6f));
+					//}
+					if (i % 30 == 0) {
+						float x = (random.nextFloat() * 800) + (terrains[t][j].getX());
+						float z = (random.nextFloat() * 800) + (terrains[t][j].getZ());
+						float y = terrains[t][j].getHeightOfTerrain(x, z);
+						entities.add(new Entity(box, random.nextInt(4), new Vector3f(x, y + 2.0f, z), 0, random.nextFloat() * 360,
+								0, 2.0f));
+					}
+					if (i % 300 == 0) {
+						float x = (random.nextFloat() * 800) + (terrains[t][j].getX());
+						float z = (random.nextFloat() * 800) + (terrains[t][j].getZ());
+						float y = terrains[t][j].getHeightOfTerrain(x, z);
+						entities.add(new Entity(cube, random.nextInt(4), new Vector3f(x, y + 2.0f, z), 0, random.nextFloat() * 360,
+								0, 1.5f));
+					}
 				}
 			}
 		}
@@ -167,10 +167,14 @@ public class MainGameLoop {
 
 		//*********** MAIN GAME LOOP **********************************
 		while (!Display.isCloseRequested()) {
-			player.move(spawnTerrain);
-			camera.move();
-			for (Terrain terrain : terrains) {
-				renderer.processTerrain(terrain);
+			for (int t = 0; t < NUMBER_OF_TERRAINS_SQUARED; t++) {
+				for (int j = 0; j < NUMBER_OF_TERRAINS_SQUARED; j++) {
+					renderer.processTerrain(terrains[t][j]);
+					if ((t == player.getCurrentTerrainCoords()[0]) && (j - 1 == player.getCurrentTerrainCoords()[1])){
+						player.move(terrains[t][j]);
+						camera.move();
+					}
+				}
 			}
 			for (Entity entity : entities) {
 				renderer.processEntity(entity);
