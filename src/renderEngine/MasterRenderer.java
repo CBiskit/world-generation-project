@@ -28,6 +28,8 @@ public class MasterRenderer {
 	private static final float RED = 0.5444f;
 	private static final float GREEN = 0.62f;
 	private static final float BLUE = 0.69f;
+
+	private static float[] fogColour = new float[]{0, 0, 0};
 	
 	private Matrix4f projectionMatrix;
 	
@@ -54,18 +56,18 @@ public class MasterRenderer {
 	public void render(List<Light> lights,Camera camera){
 		prepare();
 		shader.start();
-		shader.loadSkyColour(RED, GREEN, BLUE);
+		shader.loadSkyColour(fogColour[0], fogColour[1], fogColour[2]);
 		shader.loadLights(lights);
 		shader.loadViewMatrix(camera);
 		renderer.render(entities);
 		shader.stop();
 		terrainShader.start();
-		terrainShader.loadSkyColour(RED, GREEN, BLUE);
+		terrainShader.loadSkyColour(fogColour[0], fogColour[1], fogColour[2]);
 		terrainShader.loadLights(lights);
 		terrainShader.loadViewMatrix(camera);
 		terrainRenderer.render(terrains);
 		terrainShader.stop();
-		skyboxRenderer.render(camera, RED, GREEN, BLUE);
+		skyboxRenderer.render(camera, fogColour[0], fogColour[1], fogColour[2]);
 		terrains.clear();
 		entities.clear();
 	}
@@ -94,7 +96,15 @@ public class MasterRenderer {
 			entities.put(entityModel, newBatch);		
 		}
 	}
-	
+
+	public static float[] getFogColour() {
+		return fogColour;
+	}
+
+	public static void setFogColour(float[] fogColour) {
+		MasterRenderer.fogColour = fogColour;
+	}
+
 	public void cleanUp(){
 		shader.cleanUp();
 		terrainShader.cleanUp();

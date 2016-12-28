@@ -9,12 +9,14 @@ import org.lwjgl.opengl.GL30;
 import org.lwjgl.util.vector.Matrix4f;
 import renderEngine.DisplayManager;
 import renderEngine.Loader;
+import renderEngine.MasterRenderer;
 
 /**
  * Created by c1547497 on 27/12/2016.
  */
 public class SkyboxRenderer {
     private static final float SIZE = 500f;
+    private static final int DAY_LENGTH = 10;
 
     private static final float[] VERTICES = {
             -SIZE,  SIZE, -SIZE,
@@ -83,7 +85,7 @@ public class SkyboxRenderer {
     public void render(Camera camera, float r, float g, float b){
         shader.start();
         shader.loadViewMatrix(camera);
-        shader.loadFogColour(r,g,b);
+        shader.loadFogColour(r, g, b);
         GL30.glBindVertexArray(cube.getVaoID());
         GL20.glEnableVertexAttribArray(0);
         bindTextures();
@@ -94,27 +96,33 @@ public class SkyboxRenderer {
     }
 
     private void bindTextures(){
-        time += DisplayManager.getFrameTimeSeconds() * 1000;
-        time %= 2400000;
+        time += DisplayManager.getFrameTimeSeconds() * 1000 / DAY_LENGTH;
+        time %= 24000;
         int texture1;
         int texture2;
         float blendFactor;
-        if(time >= 0 && time < 500000){
+        if(time >= 0 && time < 5000){
             texture1 = nightTexture;
             texture2 = nightTexture;
-            blendFactor = (time - 0)/(500000 - 0);
-        }else if(time >= 500000 && time < 800000){
+            blendFactor = (time - 0)/(5000 - 0);
+            MasterRenderer.setFogColour(new float[] { 0, 0, 0 });
+        }else if(time >= 5000 && time < 8000){
             texture1 = nightTexture;
             texture2 = texture;
-            blendFactor = (time - 500000)/(800000 - 500000);
-        }else if(time >= 800000 && time < 2100000){
+            blendFactor = (time - 5000)/(8000 - 5000);
+            MasterRenderer.setFogColour(new float[] {(float)0.544 * blendFactor, (float)0.62 * blendFactor,
+                    (float) 0.69 * blendFactor});
+        }else if(time >= 8000 && time < 21000){
             texture1 = texture;
             texture2 = texture;
             blendFactor = (time - 8000)/(21000 - 8000);
+            MasterRenderer.setFogColour(new float[] { (float)0.544, (float)0.62, (float)0.69 });
         }else{
             texture1 = texture;
             texture2 = nightTexture;
-            blendFactor = (time - 2100000)/(2400000 - 2100000);
+            blendFactor = (time - 21000) / (24000 - 21000);
+            MasterRenderer.setFogColour(new float[] {(float)(0.544 - blendFactor * (0.544)), (float)(0.62 - blendFactor *(0.62)),
+                    (float)(0.69 - blendFactor * (0.69))});
         }
 
         GL13.glActiveTexture(GL13.GL_TEXTURE0);
