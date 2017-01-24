@@ -161,6 +161,7 @@ public class MainGameLoop {
 
 		//**************** INITIALISE LIGHTING ************************
 		List<Light> lights = new ArrayList<Light>();
+        //TODO RE-DO LAMP OBJECTS IN MAP TO MATCH TERRAIN HEIGHT
         //lights.add(new Light (new Vector3f(0, 1000, -7000), new Vector3f(0.4f, 0.4f, 0.4f)));
         //lights.add(new Light (new Vector3f(185, 10, -293), new Vector3f(2,0,0), new Vector3f(1, 0.01f, 0.002f)));
         //lights.add(new Light (new Vector3f(370, 17, -300), new Vector3f(0,2,2), new Vector3f(1, 0.01f, 0.002f)));
@@ -189,6 +190,7 @@ public class MainGameLoop {
 					moveplayer(t, j, camera);
 				}
 			}
+			//TODO BUILD GUI INTO MAIN GAME LOOP
 			for (Entity entity : entities) {
 				renderer.processEntity(entity);
 			}
